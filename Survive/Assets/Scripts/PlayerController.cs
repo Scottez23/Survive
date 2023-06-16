@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     //reference to bullet variables
     public GameObject bulletPrefab;
-    public float bulletSpeed = 1f;
+    
     public Transform bulletSpawnPoint;
 
     private PenSampler ps;
@@ -57,9 +57,9 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(fireKey))
             {
-            //GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity) as GameObject;
-            //bullet.GetComponent<Rigidbody>().AddForce(bulletSpawnPoint.transform.forward * bulletSpeed, ForceMode.Impulse);
-            ps.UpdatePen();
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity) as GameObject;
+            
+            
             }
 
             if (Input.GetKey(forwardsKey))

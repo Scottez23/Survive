@@ -25,14 +25,14 @@ public class PenSampler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-   
+   UpdatePen();
     }
 
     public void UpdatePen()
     {
-        
-            Ray ray = new Ray(this.transform.position, this.transform.forward);
-            RaycastHit hit;
+
+        Ray ray = new Ray(this.transform.position, this.transform.forward);
+        RaycastHit hit;
 
         while (penAmount > 0)
 
@@ -42,8 +42,7 @@ public class PenSampler : MonoBehaviour
             {
                 Debug.Log("we hit");
 
-                {
-                    Debug.Log("Player");
+                
                     impactPoint = hit.point;
                     Ray penray = new Ray(hit.point + ray.direction * wallPen, -ray.direction);
                     RaycastHit penHit;
@@ -63,7 +62,7 @@ public class PenSampler : MonoBehaviour
                     //    penPoint = null;
                     //    impactPoint = null;
                     //}
-                }
+                
 
             }
 
@@ -76,18 +75,10 @@ public class PenSampler : MonoBehaviour
             }
         }
 
-        
-       
-              
-          
-        
-        
-    }
+    }  
+    
 
-  
-
-   
-
+ 
     private void OnDrawGizmos()
     {
 
