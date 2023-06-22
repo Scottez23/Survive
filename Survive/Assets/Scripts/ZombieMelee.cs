@@ -7,6 +7,10 @@ public class ZombieMelee : MonoBehaviour
 {
     //Nav variables
     public GameObject player;
+    public GameObject head;
+    public GameObject leftArm;
+        public GameObject rightArm;
+    public GameObject body;
     private NavMeshAgent navAgent;
 
     //Zombie variables
@@ -17,10 +21,17 @@ public class ZombieMelee : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        head = GameObject.FindGameObjectWithTag("Head");
+        leftArm = GameObject.FindGameObjectWithTag("LeftArm");
+        rightArm = GameObject.FindGameObjectWithTag("RightArm");
         navAgent = GetComponent<NavMeshAgent>();
+
+        health *= FindObjectOfType<GameController>().CurrentDiff();
+        //health *= GetComponent<GameController>().CurrentDiff();
+
     }
 
-    public void TakeDamage(int damageToTake)
+    public void TakeDamage(float damageToTake)
     {
         health = health - damageToTake;
     }
@@ -28,6 +39,7 @@ public class ZombieMelee : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (health > 0)
         {
             navAgent.destination = player.transform.position;
@@ -36,6 +48,8 @@ public class ZombieMelee : MonoBehaviour
         if (health <= 0)
         {
             gameObject.GetComponent<NavMeshAgent>().isStopped = true;
+            Destroy(this.gameObject);
+
 
         }
     }
