@@ -7,36 +7,34 @@ public class ZombieMelee : MonoBehaviour
 {
     //Nav variables
     public GameObject player;
-    public GameObject head;
-    public GameObject leftArm;
-        public GameObject rightArm;
-    public GameObject body;
     private NavMeshAgent navAgent;
 
     //Zombie variables
     public float health = 100.0f;
     public float speed = 1.0f;
 
-    // Start is called before the first frame update
+    //Find player and set up navAgent
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        head = GameObject.FindGameObjectWithTag("Head");
-        leftArm = GameObject.FindGameObjectWithTag("LeftArm");
-        rightArm = GameObject.FindGameObjectWithTag("RightArm");
         navAgent = GetComponent<NavMeshAgent>();
+      }
 
-        health *= FindObjectOfType<GameController>().CurrentDiff();
-        //health *= GetComponent<GameController>().CurrentDiff();
-
-    }
-
+    //limbs or raycasts pass damage to zombie body (total health pool)
     public void TakeDamage(float damageToTake)
     {
         health = health - damageToTake;
     }
 
-    // Update is called once per frame
+    //If zombie collides with player, pause the game (game end)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player") {
+            Debug.Break();
+        }
+    }
+
+    //While health is above 0, walk at the Player. When health falls below 0, destroy zombie
     void Update()
     {
        
